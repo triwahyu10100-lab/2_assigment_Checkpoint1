@@ -52,4 +52,12 @@ def create_app(config_class=Config):
     app.register_blueprint(category_bp)
     app.register_blueprint(order_bp)
 
+    # Health check route untuk platform deployment (Helipod/Render/dll)
+    # yang perlu endpoint ringan di root ("/") untuk cek apakah
+    # container sudah siap menerima traffic — tidak menyentuh database
+    # supaya tetap cepat dan tidak gagal kalau DB sedang lambat connect.
+    @app.route('/', methods=['GET'])
+    def health_check():
+        return jsonify({'status': 'ok'}), 200
+
     return app
