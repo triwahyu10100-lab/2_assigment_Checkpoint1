@@ -3,7 +3,7 @@ Flask-SQLAlchemy==3.1.1
 Flask-Migrate==4.0.7
 Flask-JWT-Extended==4.7.4
 marshmallow==4.3.1
-psycopg2-binary==2.9.12
+psycopg[binary]>=3.1,<4
 Werkzeug==3.0.3
 python-dotenv==1.0.1
 gunicorn==26.1.0
