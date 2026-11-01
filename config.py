@@ -28,6 +28,21 @@ class Config:
     ))
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # Providers Postgres serverless seperti Neon menutup koneksi yang
+    # idle secara otomatis (atau men-suspend compute-nya). Tanpa opsi
+    # ini, SQLAlchemy bisa mencoba memakai ulang koneksi dari pool yang
+    # sudah mati itu dan gagal dengan
+    # "psycopg.OperationalError: consuming input failed: SSL
+    # connection has been closed unexpectedly". pool_pre_ping membuat
+    # SQLAlchemy selalu test koneksi dengan query ringan sebelum
+    # dipakai, dan otomatis membuat koneksi baru kalau yang lama sudah
+    # basi. pool_recycle membuang koneksi yang lebih tua dari N detik
+    # secara proaktif, sebelum providernya sendiri yang menutupnya.
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        'pool_pre_ping': True,
+        'pool_recycle': 280,
+    }
+
     # Secret used to sign/verify JWT access tokens (Flask-JWT-Extended).
     # Falls back to a dev-only default so local runs work without extra
     # setup — set a real JWT_SECRET_KEY env var before deploying.
