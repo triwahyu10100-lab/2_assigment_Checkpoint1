@@ -28,3 +28,11 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+# --- Catatan belajar pribadi -- bukan untuk di-push ke GitHub ---
+ERROR_HANDLING_DAN_CRUD_REVIEW.md
+PANDUAN_BELAJAR_CODING.md
+TUTORIAL_API_DEPLOY_POSTMAN.md
+TUTORIAL_CHECKPOINT2.md
+TUTORIAL_CHECKPOINT3.md
+VALIDASI_DAN_STATUS_CODE.md
